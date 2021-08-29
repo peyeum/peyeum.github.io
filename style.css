@@ -439,8 +439,8 @@ footer {
     background: none;
     border: none;
     outline: none;
-    font-family: inherit;
     font-size: 1rem;
+    font-family: inherit;
 }
 
 .field label {
@@ -471,6 +471,10 @@ footer {
     left: 0px;
     top: 25px;
     opacity: .5;
+}
+
+.content-name.area {
+    top: 70px;
 }
 
 .input:focus+.label-name .content-name,
