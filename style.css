@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
 
 *,
@@ -11,7 +11,7 @@
 
 :root {
     --bodyColor: #dde1e4;
-    --fontColor: #140f29;
+    --fontColor: #2c363f;
     --navBackground: #dde1e4;
     --navShadow: 0 0 3px 0 #a9a9a9;
     --subNavBackground: #c6cfd2;
@@ -60,7 +60,7 @@ nav {
     transition: all 300ms ease-in-out;
     background: var(--navBackground);
     font-size: 1.15rem;
-    font-weight: 600;
+    font-family: 'Ubuntu', sans-serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -81,6 +81,7 @@ nav {
 .sub-nav {
     display: flex;
     gap: 10px;
+    font-weight: bold;
     list-style: none;
 }
 
@@ -129,6 +130,7 @@ nav {
 }
 
 .hamburger div:nth-child(1) {
+    transition: all 230ms;
     transform-origin: 0% 100%;
 }
 
@@ -338,7 +340,7 @@ footer {
     position: relative;
     padding: 1rem 10vw;
     width: auto;
-    background: #0099ff;
+    background: #89c2d9;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -374,8 +376,8 @@ footer {
     border: none;
     font-family: inherit;
     border-radius: 5px;
-    background: #A9BCD0;
-    color: whitesmoke;
+    background: #3d5a80;
+    color: #dde1e4;
     width: 25%;
     height: 30px;
     opacity: .9;
