@@ -1,0 +1,188 @@
+<!-- Bismillah -->
+<!DOCTYPE html>
+<html lang="en" data-color-mode="">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="icon.png" type="image/icon type" />
+    <!-- <title>Farhan's Web Potfolio</title> -->
+    <title>Web Potfolio</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <!-- <h4 style="cursor: pointer;">Farhan</h4> -->
+            <h4 style="cursor: pointer;">Home</h4>
+        </div>
+        <ul class="sub-nav">
+            <li><a onclick="meScroll('.about')">About</a></li>
+            <li><a onclick="meScroll('.project')">Projects</a></li>
+            <li><a onclick="meScroll('.contact')">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </nav>
+    <div class="container">
+        <header>
+            <div class="greetings">
+                <h3></h3>
+                <h2></h2>
+                <p></p>
+            </div>
+        </header>
+
+        <div class="content">
+            <div class="about">
+                <h3>About</h3>
+                <img width="155px" src="https://www.fnordware.com/superpng/pnggrad8rgb.png" alt="logo about" />
+                <div class="par">
+                    <p>
+                        Hi! I'm Muhammad Farhan, 21 yo. A mechanic and also a student at <a
+                            href="https://stmik.ipem.ac.id/">STMIK Insan Pembangunan</a>.
+                    </p>
+                    <br>
+                    <p>
+                        I got to know and be interested in programming since
+                        I entered college in 2019 but I just started studying
+                        programming language especially for web development this year.
+                        I currently learning javascript.
+                    </p>
+                </div>
+                <h4>Skills</h4>
+                <div class="skills">
+                    <div class="skill language">
+                        <h3>Languages</h3>
+                        <p>HTML & CSS</p>
+                        <p>Javascript</p>
+                    </div>
+                    <div class="skill frontend">
+                        <h3>Frontend</h3>
+                        <p>undefined</p>
+                    </div>
+                    <div class="skill backend">
+                        <h3>Backend</h3>
+                        <p>undefined</p>
+                    </div>
+                    <div class="skill Tools">
+                        <h3>Tools</h3>
+                        <p>VS Code</p>
+                        <p>Chrome</p>
+                        <p>FireFox</p>
+                        <!-- <p>Git</p>
+                        <p>Figma</p>
+                        <p>Inkscape</p> -->
+                    </div>
+                </div>
+            </div>
+            <div class="project">
+                <h3>Projects</h3>
+                <p>
+                    I do "learning by doing" projects in order
+                    to understand more about programming language
+                    and web development.
+                </p>
+            </div>
+            <div class="contact">
+                <h3 style="text-align: center">Contact</h3>
+                <p>
+                    You can directly get in touch with me,
+                    or you can reach me out via email and socials below:
+                </p>
+                <form name="submit-to-google-sheet" class="form">
+
+                    <div class="alert d-none">
+                        <p></p>
+                        <span class="dismiss">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="122.878px"
+                                height="122.88px" viewBox="0 0 122.878 122.88"
+                                enable-background="new 0 0 122.878 122.88" xml:space="preserve">
+                                <g>
+                                    <path
+                                        d="M1.426,8.313c-1.901-1.901-1.901-4.984,0-6.886c1.901-1.902,4.984-1.902,6.886,0l53.127,53.127l53.127-53.127 c1.901-1.902,4.984-1.902,6.887,0c1.901,1.901,1.901,4.985,0,6.886L68.324,61.439l53.128,53.128c1.901,1.901,1.901,4.984,0,6.886 c-1.902,1.902-4.985,1.902-6.887,0L61.438,68.326L8.312,121.453c-1.901,1.902-4.984,1.902-6.886,0 c-1.901-1.901-1.901-4.984,0-6.886l53.127-53.128L1.426,8.313L1.426,8.313z" />
+                                </g>
+                            </svg>
+                        </span>
+                    </div>
+
+                    <div class="field">
+                        <input class="input" name="nama" type="text" required />
+                        <label class="label-name" for="nama">
+                            <span class="content-name">Name</span>
+                        </label>
+                    </div>
+                    <div class="field">
+                        <input class="input" name="email" type="email" required />
+                        <label class="label-name" for="email">
+                            <span class="content-name">Email</span>
+                        </label>
+                    </div>
+                    <div class="field text-area">
+                        <textarea class="input" name="pesan" rows="5" style="resize: none" required></textarea>
+                        <label class="label-name" for="pesan">
+                            <span class="content-name">Message</span>
+                        </label>
+                    </div>
+
+                    <button class="submit f-button" type="submit">Send</button>
+
+                </form>
+                <div class="social">
+                    <a class="icon" href="mailto:farhanm200@gmail.com" target="_blank">
+                        <svg class="fa-ic" xmlns="http://www.w3.org/2000/svg" height="32" width="32"
+                            viewBox="52 42 88 66">
+                            <path d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6" />
+                            <path d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15" />
+                            <path d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2" />
+                            <path d="M72 74V48l24 18 24-18v26L96 92" />
+                            <path d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2" />
+                        </svg>
+                        Email
+                    </a>
+                    <a class="icon" href="https://discordapp.com/users/538242989756121088/" target="_blank">
+                        <svg class="fa-ic" aria-hidden="true" data-view-component="true" height="32" width="32">
+                            <path fill-rule="evenodd"
+                                d="M26.0015 6.9529C24.0021 6.03845 21.8787 5.37198 19.6623 5C19.3833 5.48048 19.0733 6.13144 18.8563 6.64292C16.4989 6.30193 14.1585 6.30193 11.8336 6.64292C11.6166 6.13144 11.2911 5.48048 11.0276 5C8.79575 5.37198 6.67235 6.03845 4.6869 6.9529C0.672601 12.8736 -0.41235 18.6548 0.130124 24.3585C2.79599 26.2959 5.36889 27.4739 7.89682 28.2489C8.51679 27.4119 9.07477 26.5129 9.55525 25.5675C8.64079 25.2265 7.77283 24.808 6.93587 24.312C7.15286 24.1571 7.36986 23.9866 7.57135 23.8161C12.6241 26.1255 18.0969 26.1255 23.0876 23.8161C23.3046 23.9866 23.5061 24.1571 23.7231 24.312C22.8861 24.808 22.0182 25.2265 21.1037 25.5675C21.5842 26.5129 22.1422 27.4119 22.7621 28.2489C25.2885 27.4739 27.8769 26.2959 30.5288 24.3585C31.1952 17.7559 29.4733 12.0212 26.0015 6.9529ZM10.2527 20.8402C8.73376 20.8402 7.49382 19.4608 7.49382 17.7714C7.49382 16.082 8.70276 14.7025 10.2527 14.7025C11.7871 14.7025 13.0425 16.082 13.0115 17.7714C13.0115 19.4608 11.7871 20.8402 10.2527 20.8402ZM20.4373 20.8402C18.9183 20.8402 17.6768 19.4608 17.6768 17.7714C17.6768 16.082 18.8873 14.7025 20.4373 14.7025C21.9717 14.7025 23.2271 16.082 23.1961 17.7714C23.1961 19.4608 21.9872 20.8402 20.4373 20.8402Z">
+                            </path>
+                        </svg>
+                        Discord
+                    </a>
+                    <a class="icon" href="https://github.com/peyeum" target="_blank">
+                        <svg class="fa-ic" aria-hidden="true" viewBox="0 0 16 16" version="1.1"
+                            data-view-component="true" height="30" width="30"
+                            class="octicon octicon-mark-github v-align-middle">
+                            <path fill-rule="evenodd"
+                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                            </path>
+                        </svg>
+                        <p>Github</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <footer>
+            <!-- <img class="foot-wave" src="./images/foot-wave.svg" alt=""> -->
+            <!-- <div class="footer"> -->
+            <!-- </div> -->
+            <h4>Created by Farhan with ❤</h4>
+            <div class="info" aria-label="Light" style="display: grid; align-items: center; gap: .25rem">
+                <div class="theme">
+                    <div class="button"></div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <div class="overlay"></div>
+</body>
+
+</html>
