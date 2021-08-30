@@ -192,3 +192,8 @@ el(".dismiss").addEventListener("click", function () {
     "d-none"
   );
 });
+
+// email validation
+el("input[type=email]").addEventListener("change", function () {
+  !this.checkValidity() ? (this.value = "") : false;
+});
