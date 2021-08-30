@@ -24,6 +24,8 @@
             rgba(217, 222, 226, 0.97),
             rgba(217, 222, 226, .99));
     --themeSlider: translateX(3px);
+    --primary: #dde1e4;
+    --accent: #3d5a80;
 }
 
 html[data-color-mode='dark'] {
@@ -84,6 +86,11 @@ nav {
     list-style: none;
 }
 
+.sub-nav li {
+    padding: 10px 10px;
+    border-radius: 5px;
+}
+
 .sub-nav.mobile {
     height: 200px;
 }
@@ -98,8 +105,11 @@ nav {
 
 .sub-nav>*:hover,
 .sub-nav>*:active {
-    text-decoration: underline;
     bottom: 3px;
+    font-weight: 500;
+    color: var(--primary);
+    cursor: pointer;
+    background: var(--accent);
 }
 
 .logo {
@@ -376,7 +386,7 @@ footer {
     border: none;
     font-family: inherit;
     border-radius: 5px;
-    background: #3d5a80;
+    background: var(--accent);
     color: #dde1e4;
     width: 25%;
     height: 30px;
