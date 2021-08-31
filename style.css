@@ -91,6 +91,15 @@ nav {
     border-radius: 5px;
 }
 
+.sub-nav>*:hover,
+.sub-nav>*:active {
+    bottom: 3px;
+    font-weight: 500;
+    color: var(--primary);
+    cursor: pointer;
+    background: var(--accent);
+}
+
 .sub-nav.mobile {
     height: 200px;
 }
@@ -101,15 +110,6 @@ nav {
     border-radius: 7px;
     text-align: center;
     background: var(--subNavLi);
-}
-
-.sub-nav>*:hover,
-.sub-nav>*:active {
-    bottom: 3px;
-    font-weight: 500;
-    color: var(--primary);
-    cursor: pointer;
-    background: var(--accent);
 }
 
 .logo {
@@ -651,6 +651,17 @@ a {
 
     .sub-nav li {
         transition: transform 250ms ease-in-out;
+        padding: initial;
+        border-radius: 5px;
+    }
+
+    .sub-nav>*:hover,
+    .sub-nav>*:active {
+        bottom: initial;
+        font-weight: bold;
+        color: var(--primary);
+        cursor: pointer;
+        background: initial;
     }
 
     .hamburger {
