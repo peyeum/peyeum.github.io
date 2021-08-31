@@ -26,7 +26,7 @@ const overham = function makeOverlayAppearAndSomeAnimation() {
 // custom scroll function
 const meScroll = function scrollToTargettedElement(target) {
   const { height: navH } = el("nav").getBoundingClientRect();
-  const yLoc = el(target).offsetTop - navH - 15;
+  const yLoc = el(target).offsetTop - navH + 35;
 
   return scrollTo(0, yLoc);
 };
@@ -132,16 +132,11 @@ el(".overlay").addEventListener("click", function ({ target }) {
   if (target === this) overham();
 });
 
+// hide sub navbar when about projects contact and logo clicked
 document.addEventListener("click", ({ target }) => {
-  const [about, project, contact] = el("li a");
-  target === about ||
-  target === project ||
-  target === contact ||
-  target === el(".logo > *")
-    ? el(".overlay").classList.contains("active")
-      ? overham()
-      : false
-    : false;
+  const elements = [el(".logo > *"), ...el(".sub-nav li"), ...el("li a")];
+
+  elements.includes(target) ? overham() : false;
 });
 
 // pesan dari contact us
