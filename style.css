@@ -26,6 +26,8 @@
     --themeSlider: translateX(3px);
     --primary: #dde1e4;
     --accent: #3d5a80;
+    --sunPosition: translateY(0%) rotate(0deg);
+    --moonPosition: translateY(-150%) rotate(-90deg);
 }
 
 html[data-color-mode='dark'] {
@@ -43,6 +45,9 @@ html[data-color-mode='dark'] {
             rgba(44, 54, 63, .99),
             rgba(44, 54, 63, 1));
     --themeSlider: translateX(27px);
+    --sunPosition: translateY(150%) rotate(120deg);
+    --moonPosition: translateY(0%) rotate(0deg);
+
 }
 
 html,
@@ -359,7 +364,7 @@ footer {
 
 /* ======custom button===== */
 
-.theme {
+/* .theme {
     position: relative;
     display: flex;
     width: 45px;
@@ -367,6 +372,37 @@ footer {
     border-radius: 10px;
     background: var(--bodyColor);
     transition: 250ms;
+} */
+
+.theme {
+    --size: 45px;
+    position: relative;
+    display: flex;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 10px;
+    background: var(--bodyColor);
+    border: none;
+    overflow: hidden;
+}
+
+.theme>div {
+    --size: 25px;
+    position: absolute;
+    height: var(--size);
+    width: var(--size);
+    inset: 0;
+    margin: auto;
+    fill: var(--fontColor);
+    transition: 500ms;
+}
+
+.sun {
+    transform: var(--sunPosition);
+}
+
+.moon {
+    transform: var(--moonPosition);
 }
 
 .button {
@@ -576,7 +612,7 @@ a {
 
 
 
-.info {
+/* .info {
     gap: .5rem;
     border: none;
 }
@@ -587,7 +623,7 @@ a {
     text-align: center;
     font-size: .9rem;
     font-weight: bold;
-}
+} */
 
 
 /* .info::after {

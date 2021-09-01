@@ -98,7 +98,7 @@ const getViewport = function getViewportOfScreen() {
 })();
 
 // theme button
-el(".button").addEventListener("click", function () {
+el(".theme").addEventListener("click", function () {
   const html = el("html");
   html.dataset.colorMode !== "dark"
     ? (html.dataset.colorMode = "dark")
