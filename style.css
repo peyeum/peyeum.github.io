@@ -23,11 +23,10 @@
             rgba(217, 222, 226, .99),
             rgba(217, 222, 226, 0.97),
             rgba(217, 222, 226, .99));
-    --themeSlider: translateX(3px);
     --primary: #dde1e4;
     --accent: #3d5a80;
     --sunPosition: translateY(0%) rotate(0deg);
-    --moonPosition: translateY(-150%) rotate(-90deg);
+    --moonPosition: translateY(-200%) rotate(-90deg);
 }
 
 html[data-color-mode='dark'] {
@@ -44,8 +43,7 @@ html[data-color-mode='dark'] {
             rgba(44, 54, 63, 1),
             rgba(44, 54, 63, .99),
             rgba(44, 54, 63, 1));
-    --themeSlider: translateX(27px);
-    --sunPosition: translateY(150%) rotate(120deg);
+    --sunPosition: translateY(200%) rotate(120deg);
     --moonPosition: translateY(0%) rotate(0deg);
 
 }
@@ -364,57 +362,53 @@ footer {
 
 /* ======custom button===== */
 
-/* .theme {
-    position: relative;
-    display: flex;
-    width: 45px;
-    height: 20px;
-    border-radius: 10px;
-    background: var(--bodyColor);
-    transition: 250ms;
-} */
-
 .theme {
-    --size: 45px;
+    --size: 35px;
+    --black: #2c363f;
     position: relative;
     display: flex;
     width: var(--size);
     height: var(--size);
     border-radius: 10px;
-    background: var(--bodyColor);
-    border: none;
+    background: var(--primary);
+    border: 1px solid hsl(208 18% 21% / .3);
     overflow: hidden;
+    cursor: pointer;
 }
 
 .theme>div {
-    --size: 25px;
     position: absolute;
-    height: var(--size);
-    width: var(--size);
     inset: 0;
     margin: auto;
-    fill: var(--fontColor);
+    fill: var(--black);
     transition: 500ms;
+    opacity: .7;
+}
+
+.theme:hover {
+    box-shadow: 0 0 1px var(--black);
+}
+
+.theme:hover>div {
+    opacity: 1;
+}
+
+.theme:active {
+    transform: translateY(5%) rotate(5deg);
 }
 
 .sun {
+    --size: 20px;
+    height: var(--size);
+    width: var(--size);
     transform: var(--sunPosition);
 }
 
 .moon {
+    --size: 15px;
+    height: var(--size);
+    width: var(--size);
     transform: var(--moonPosition);
-}
-
-.button {
-    --circleSize: 15px;
-    width: var(--circleSize);
-    height: var(--circleSize);
-    margin: auto 0;
-    border-radius: 50%;
-    background: var(--fontColor);
-    transform: var(--themeSlider);
-    transition: 250ms;
-    cursor: pointer;
 }
 
 .f-button {
