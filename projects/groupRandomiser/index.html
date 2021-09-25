@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Randomise</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="createGroup">
+            <h2 style="padding-top: .8rem;">Generator Kelompok Acak</h2>
+            <form>
+                <div class="inputGroup">
+                    <label for="groupCount">Jumlah Kelompok yang Akan Dibuat?</label>
+                    <input type="number" id="groupCount" required>
+                </div>
+                <div class="inputGroup">
+                    <label for="groupMember">Masukkan Anggota</label>
+                    <textarea id="groupMember" style="resize: none" required></textarea>
+                    <p style="font-size: .8rem;">Setiap aggota dipisahkan dengan garis baru!</p>
+                </div>
+                <input type="submit" value="Buat!" style="margin-top: 1rem;">
+            </form>
+        </div>
+
+        <div class="resultGroup d-none">
+            <span class="result-title">
+                <h2>Hasil Acak Kelompok</h2>
+                <button onclick="pageToggle()">Back</button>
+            </span>
+            <div class="hasil">
+                <!-- group will rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="./randomize.js"></script>
+    <script src="./script.js"></script>
+</body>
+
+</html>
