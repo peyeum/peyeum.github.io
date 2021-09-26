@@ -39,11 +39,10 @@
 const rIdx = (arr) => Math.floor(Math.random() * (arr.length - 1 - 0) + 0);
 
 const rPush = (a, b, cap) => {
-  if (!b.length) return;
-  if (a.length <= cap) {
-    a.push(b.splice(rIdx(b), 1)[0]);
-    rPush(a, b, cap);
-  }
+  if (a.length === cap || !b.length) return;
+  a.push(b.splice(rIdx(b), 1)[0]);
+  if (!cap) return;
+  rPush(a, b, cap);
 };
 
 const group = (param, count) => {
@@ -52,5 +51,6 @@ const group = (param, count) => {
   const b = [...param];
   for (let i = 0; i < count; i++) a.push([]);
   for (let i = 0; i < a.length; i++) rPush(a[i], b, cap);
+  if (b.length) for (let i = 0; i < a.length; i++) rPush(a[i], b);
   return a;
 };

@@ -19,6 +19,7 @@ el("form").addEventListener("submit", (e) => {
   const groupCount = parseInt(el("#groupCount").value);
 
   renderGroup(group(mahasiswa, groupCount));
+
   pageToggle();
 });
 
@@ -26,6 +27,11 @@ const pageToggle = () => {
   [el(".createGroup"), el(".resultGroup")].forEach((e) =>
     e.classList.toggle("d-none")
   );
+};
+
+const buttonFun = () => {
+  pageToggle();
+  el(".hasil").innerHTML = null;
 };
 
 const renderGroup = (param) => {
