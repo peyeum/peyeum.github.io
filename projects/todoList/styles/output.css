@@ -617,8 +617,8 @@ video {
 .h-20 {
 	height: 5rem;
 }
-.h-screen {
-	height: 100vh;
+.h-\[var\(--winHeight\)\] {
+	height: var(--winHeight);
 }
 .grid-rows-\[max-content\2c 1fr\2c max-content\] {
 	grid-template-rows: -webkit-max-content 1fr -webkit-max-content;
@@ -645,7 +645,6 @@ video {
 	--tw-bg-opacity: 1;
 	background-color: rgba(49, 46, 129, var(--tw-bg-opacity));
 }
-
 .p-1 {
 	padding: 0.25rem;
 }

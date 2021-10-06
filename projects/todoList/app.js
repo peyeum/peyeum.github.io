@@ -411,9 +411,16 @@ window.addEventListener("load", () => {
   remainTask();
   showTodos();
   dummyTodo();
+  // check todo for each one of it
   for (let i = 0; i < el(".todo--task", "node").length; i++) {
     checkTodo(i);
   }
+
+  // inserting css rule depens on windows inner height
+  el("link").sheet.insertRule(`
+    :root {
+      --winHeight: ${window.innerHeight}px;
+    }`);
 });
 
 // // Task List Input Box Validation
