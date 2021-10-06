@@ -6,29 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOTA</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles/output.css">
+    <script src="https://kit.fontawesome.com/424f38a2af.js" crossorigin="anonymous"></script>
     <script defer src="app.js"></script>
 </head>
 
 <body>
-    <nav>
-        <h4>TOTA</h4>
-    </nav>
-    <div class="container">
-        <header>
-            <h4>The Todo Task List App</h4>
-        </header>
-        <main>
+    <div class="grid grid-rows-[max-content,1fr,max-content] h-screen text-gray-300 text-sm sm:text-lg">
+        <nav class="bg-indigo-900 py-4 px-1">
+            <h4>TOTA</h4>
+        </nav>
+
+        <main class="relative grid bg-gray-900">
             <div class="tasks">
-                <span class="task--title">
+                <span class="task--title flex justify-around my-4">
                     <p>Task List</p>
                     <!-- task remaining goes here -->
                     <p class="task--remain"></p>
                 </span>
 
-                <form class="task--add-new">
-                    <input type="text" placeholder="add new task" required>
-                    <button>+</button>
+                <ul class="task--content">
+                    <!-- task list goes here -->
+                </ul>
+
+                <form class="task--add-new mx-2 my-2">
+                    <input class="px-2 py-1 rounded text-gray-800" type="text" placeholder="add new task" required>
+                    <button><i class="fas fa-plus pointer-events-none"></i></button>
                 </form>
 
                 <div class="task--remove">
@@ -36,25 +39,14 @@
                     <button class="task--remove-done">remove completed tasks</button>
                 </div>
 
-                <ul class="task--content">
-                    <!-- task list goes here -->
-                </ul>
             </div>
 
-
-            <div class="todos">
-                <div class="todo--task">
-                    <span class="todo--title"></span>
-                    <ul>
-                        <li>a</li>
-                        <li>b</li>
-                        <li>c</li>
-                    </ul>
-                </div>
-
+            <div class="todos hidden">
+                <!-- todos goes here -->
             </div>
         </main>
-        <footer>
+
+        <footer class="py-4 px-2 bg-indigo-900">
             <h4>Your Simple and Useful Todos</h4>
         </footer>
     </div>
