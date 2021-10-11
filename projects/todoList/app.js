@@ -381,6 +381,14 @@ const deleteAllTodo = (position) => {
   showTodos();
 };
 
+// callback function for menu button inside task--add-new triggered
+const menuEvent = (event) => {
+  // select task--remove element
+  const taskRemove = event.srcElement.parentElement.nextElementSibling;
+
+  taskRemove.classList.toggle("scale-0");
+};
+
 // callback function when todo--add-new onSubmit event triggered
 const submitEvent = (event) => {
   // define the element of the form
@@ -416,10 +424,19 @@ window.addEventListener("load", () => {
     checkTodo(i);
   }
 
-  // inserting css rule depens on windows inner height
+  // add css variable depens on windows inner height
   el("link").sheet.insertRule(`
     :root {
       --winHeight: ${window.innerHeight}px;
+      --mainHeight: calc(var(--winHeight) - ${
+        el("nav").getBoundingClientRect().height +
+        el("footer").getBoundingClientRect().height
+      }px);
+      --tHeight: calc(var(--mainHeight) - ${
+        el(".task--title").getBoundingClientRect().height +
+        el(".task--foot").getBoundingClientRect().height
+      }px);
+
     }`);
 });
 
@@ -439,7 +456,7 @@ el(".task--add-new").addEventListener("submit", function (e) {
   e.preventDefault();
 
   // push data to local storage
-  addLocal(this.firstElementChild.value);
+  addLocal(this.firstElementChild.nextElementSibling.value);
 
   // add the input value into list
   addTask();
@@ -488,6 +505,13 @@ document.addEventListener("click", ({ target }) => {
 
     // check for remain task to do
     remainTask();
+  }
+
+  if (
+    target != el("button[type=button]") &&
+    !el(".task--remove").classList.contains("scale-0")
+  ) {
+    el(".task--remove").classList.add("scale-0");
   }
 
   el(".task--delete", "node").forEach((e, i) => {

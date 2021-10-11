@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOTA</title>
+    <title>Task Todo</title>
     <link rel="stylesheet" href="./styles/output.css">
     <script src="https://kit.fontawesome.com/424f38a2af.js" crossorigin="anonymous"></script>
     <script defer src="app.js"></script>
@@ -14,40 +14,55 @@
 <body>
     <div class="grid grid-rows-[max-content,1fr,max-content] h-[var(--winHeight)] text-gray-300 text-sm sm:text-lg">
         <nav class="bg-indigo-900 py-4 px-1">
-            <h4>TOTA</h4>
+            <h4>TATO</h4>
         </nav>
 
-        <main class="relative grid bg-gray-900">
-            <div class="tasks">
+        <main class="relative grid bg-gray-900 max-h-[var(--mainHeight)]">
+            <div class="tasks overflow-scroll grid grid-rows-[max-content,1fr,max-content]">
                 <span class="task--title flex justify-around my-4">
                     <p>Task List</p>
                     <!-- task remaining goes here -->
                     <p class="task--remain"></p>
                 </span>
 
-                <ul class="task--content">
+                <ul class="task--content max-h-[var(--tHeight)] overflow-scroll">
                     <!-- task list goes here -->
                 </ul>
 
-                <form class="task--add-new mx-2 my-2">
-                    <input class="px-2 py-1 rounded text-gray-800" type="text" placeholder="add new task" required>
-                    <button><i class="fas fa-plus pointer-events-none"></i></button>
-                </form>
+                <div class="task--foot relative">
+                    <form class="task--add-new m-4 py-1 grid grid-cols-[1fr,80%,1fr] bg-gray-700 rounded-xl">
+                        <button type="button" onclick="menuEvent(event)">
+                            <i class="fas fa-ellipsis-v pointer-events-none"></i>
+                        </button>
 
-                <div class="task--remove">
-                    <button class="task--remove-all">remove all tasks</button>
-                    <button class="task--remove-done">remove completed tasks</button>
+                        <input class="px-2 py-1 bg-transparent" type="text" placeholder="add new task" required>
+
+                        <button type="submit">
+                            <i class="fas fa-plus pointer-events-none"></i>
+                        </button>
+                    </form>
+
+
+
+                    <div
+                        class="task--remove absolute grid grid-cols-1 auto-rows-[2rem] gap-1 top-[-5rem] ml-4 p-2 rounded bg-gray-700 transform origin-bottom-left scale-0 transition-transform">
+
+                        <button class="task--remove-all px-1 text-left">Remove all tasks</button>
+
+                        <button class="task--remove-done px-1 text-left">Remove completed tasks</button>
+
+                    </div>
                 </div>
 
             </div>
 
-            <div class="todos hidden">
+            <div class="todos overflow-scroll hidden">
                 <!-- todos goes here -->
             </div>
         </main>
 
         <footer class="py-4 px-2 bg-indigo-900">
-            <h4>Your Simple and Useful Todos</h4>
+            <h4>Just a List of Tasks todo</h4>
         </footer>
     </div>
 </body>
