@@ -1,23 +1,46 @@
-/* element selector function using query selector
-select element and return as an element or a nodeList if bool parameter is true */
-const el = function selectElement(target, bool) {
-  if (!bool) {
-    // check whether the target is a nodelist
-    return document.querySelectorAll(target).length !== undefined &&
-      document.querySelectorAll(target).length > 1
-      ? document.querySelectorAll(target)
-      : document.querySelector(target);
-  } else return document.querySelectorAll(target); // if function has bool parameter use querry selector all
+/* ---------------
+  HTML element selector function
+  e return one element, 'e' for 'element'
+  el return a nodeList, 'el' for 'element list'
+  ---------------- */
+const e = (target) => document.querySelector(target);
+const el = (target) => document.querySelectorAll(target);
+
+// randomly generate 6 digit of number and(or) string
+const myId = () => {
+  // initiating source and temporary array
+  const src = [];
+  const arr = [];
+  // push number and alphabet into source array
+  for (let d = 0; d <= 90; d++) {
+    if (d <= 9) src.push(d); // 0-9
+    if (d >= 65) src.push(String.fromCharCode(d).toLowerCase()); // a-z
+  }
+  // function that return random index from an array
+  const rIdx = (arr) =>
+    Math.floor(Math.random() * (arr.length - 1 - 0 + 1) + 0);
+  // function that return a randomised array
+  const shuffleArr = (arr) => {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  };
+  // pushing randomied array into temp array
+  for (let c = 0; c < 6; c++) arr.push(shuffleArr(src)[rIdx(src)]);
+  // return randomised temp array into string
+  return shuffleArr(arr).join("");
 };
 
 // check if there is a task or no
 const isTask = () => {
-  return el(".task--content").children.length ? true : false;
+  return e(".task--content").children.length ? true : false;
 };
 
 // check if there is a todo or no
 const isTodo = () => {
-  const nodeList = el(".todo--content", "node");
+  const nodeList = el(".todo--content");
   for (let i = 0; i < arr.length; i++) {
     if (nodeList[i].childElementCount) return true;
   }
@@ -29,8 +52,8 @@ for initial task and todo if there are no
 task created yet */
 const dummyTodo = () => {
   // if there is no task and dummyTodo not created yet then add the dummyTodo
-  if (!isTask() && !el(".dummyTodo"))
-    el(".todos").insertAdjacentHTML(
+  if (!isTask() && !e(".dummyTodo"))
+    e(".todos").insertAdjacentHTML(
       "beforeend",
       `
         <div class="dummyTodo">
@@ -40,63 +63,54 @@ const dummyTodo = () => {
     );
 
   // remove the dummyTodo is there is a task
-  if (isTask() && el(".dummyTodo")) el(".dummyTodo").remove();
+  if (isTask() && e(".dummyTodo")) e(".dummyTodo").remove();
 };
 
 // check current task function
 const checkTask = () => {
-  if (!isTask()) {
+  if (!isTask() && !e(".task--info")) {
     // if task list is empty, give alert to user
-    el(".task--content").insertAdjacentHTML(
+    e(".task--content").insertAdjacentHTML(
       "beforebegin",
       `
-      <div class="task--info grid place-items-center mx-2 my-1 rounded h-20 text-lg bg-gray-800">
-        <p class="mx-6 text-center" >No task to do currently, lets make some!</p>
+      <div class="task--info grid place-items-center mx-2 my-1 px-2 py-3 h-[min-content] rounded text-lg bg-gray-800">
+          <p class="mx-6 text-center" >
+            No task to do currently, lets make some! <br> or just take a break for a while <i class="fas fa-mug-hot"></i>
+          </p>
       </div>
     `
     );
-    // if task list not empty remove the alert
-  } else if (el(".tasks>.task--info")) {
-    el(".tasks>.task--info").remove();
-  }
-  if (el(".tasks>.task--info", "node")) {
-    el(".tasks>.task--info", "node").forEach((e, i) => {
-      if (i > 0) e.remove();
-    });
-  }
+  } else if (isTask() && e(".task--info")) e(".task--info").remove();
 };
 
 // check current todo
 const checkTodo = (position) => {
-  const todoBody = el(".todo--content", "node")[position];
+  const todoBody = el(".todo--content")[position];
   if (!todoBody) return;
 
   const todoInfo = todoBody.parentElement.querySelector(".todo--info");
   // if (!todoInfo) return;
 
   if (!todoBody.childElementCount && !todoInfo) {
-    el(".todo--content", "node")[position].insertAdjacentHTML(
+    el(".todo--content")[position].insertAdjacentHTML(
       "beforebegin",
-      /* html */
       `
-        <p class="todo--info">
-          Nothing todo currently, lets do something!
+        <p class="todo--info bg-gray-800 h-[min-content] rounded mx-2 my-1 px-3 py-2 text-lg text-center">
+          Nothing todo currently, lets do something productive!📝
         </p>
       `
     );
-  } else if (todoBody.childElementCount && todoInfo) {
-    todoInfo.remove();
-  }
+  } else if (todoBody.childElementCount && todoInfo) todoInfo.remove();
 };
 
 // update remaining taks to acomplish
 const remainTask = () => {
   let tasks = "";
   if (isTask()) {
-    tasks = el(".task--content>*", "node").length;
+    tasks = el(".task--content>*").length;
   } else tasks = "No Task";
 
-  el(".task--remain").textContent = `${tasks}`;
+  e(".task--remain").textContent = `${tasks}`;
 };
 
 // update remaining todo
@@ -126,42 +140,96 @@ const addLocal = (param) => {
   localStorage.setItem("Task List", JSON.stringify(taskList));
 };
 
+// find todo with task id
+const todoFind = (task) => {
+  const list = el(".todo--task");
+  for (let todo = 0; todo < list.length; todo++)
+    if (list[todo].id === task.id) return list[todo];
+};
+
+// return active todo element
+const todoActive = () => {
+  const todos = el(".todo--task");
+  for (let todo = 0; todo < todos.length; todo++) {
+    if (!todos[todo].classList.contains("hidden")) return todos[todo];
+  }
+};
+
+// callback function for onclick event back button
+const backClickHandler = ({ srcElement: element }) => {
+  [e(".todos"), e(".tasks")].forEach((e) => {
+    e.classList.toggle("hidden");
+  });
+  todoActive().classList.toggle("grid");
+  todoActive().classList.toggle("hidden");
+  element.classList.toggle("pointer-events-none");
+  element.firstElementChild.classList.toggle("opacity-0");
+};
+
+const isMobile = () => {
+  let boolean = false;
+  el("main>*").forEach((e) =>
+    e.classList.contains("hidden") ? (boolean = true) : false
+  );
+  return boolean;
+};
+
+// callback function for onclick event in e('.task')
+const taskClickHandler = ({ srcElement: element }) => {
+  if (!element.id) return;
+  if (!isMobile()) return;
+
+  e(".backButton").classList.toggle("pointer-events-none");
+  e(".backButton").firstElementChild.classList.toggle("opacity-0");
+  e(".tasks").classList.toggle("hidden");
+  e(".todos").classList.toggle("hidden");
+  todoFind(element).classList.toggle("hidden");
+  todoFind(element).classList.toggle("grid");
+};
+
 // render tasklist and todo body into document
 const task = (param) => {
+  // generate id
+  const id = myId();
   // insert task from last taskList element into document
-  el(".task--content").insertAdjacentHTML(
+  e(".task--content").insertAdjacentHTML(
     "beforeend",
     `
-      <li class="task mx-2 my-1 py-2 relative rounded bg-gray-800">
-        <p class="task--name ml-2">${param}</p>
+      <li class="task mx-2 my-1 py-2 relative rounded bg-gray-800 cursor-pointer" id="${id}" onclick="taskClickHandler(event)">
+        <p class="task--name ml-2 pointer-events-none">${param}</p>
         <button class="task--delete absolute inset-y-0 right-4"><i class="fas fa-trash pointer-events-none p-1 rounded bg-gray-900 text-gray-500"></i></button>
       </li>
     `
   );
 
   // insert todo body element into document
-  el(".todos").insertAdjacentHTML(
+  e(".todos").insertAdjacentHTML(
     "beforeend",
     `
-      <div class="todo--task">
-        <span class="todo--title">
+      <div class="todo--task grid-rows-[max-content,1fr,max-content] h-full hidden" id="${id}">
+        <span class="todo--title flex justify-around my-4">
           <p>${param}</p>
           <p class="todo--remain"></p>
         </span>
 
-        <form class="todo--add-new" onSubmit="submitEvent(event)">
-          <input type="text" placeholder="add new todo" required>
-          <button><i class="fas fa-plus pointer-events-none"></i></button>
-        </form>
-
-        <div class="todo--remove">
-          <button class="todo--remove-all">remove all todo</button>
-          <button class="task--remove-done">remove completed todo</button>
-        </div>
-
-        <ul class="todo--content">
+        <ul class="todo--content overflow-scroll">
           <!-- todo list goes here -->
         </ul>
+
+        <div class="todo--footer">
+          <form class="todo--add-new m-4 py-1 grid grid-cols-[1fr,80%,1fr] bg-gray-700 rounded-xl" onSubmit="submitEvent(event)">
+            <button type="button" onclick="menuEvent(event)" class="todo--menuButton">
+              <i class="fas fa-ellipsis-v pointer-events-none"></i>
+            </button>
+            <input class="px-2 py-1 bg-transparent" type="text" placeholder="add new todo" required>
+            <button><i class="fas fa-plus pointer-events-none"></i></button>
+          </form>
+
+          <div class="todo--remove absolute grid grid-cols-1 auto-rows-[2rem] gap-1 bottom-[4rem] ml-4 p-2 rounded bg-gray-700 transform origin-bottom-left transition-transform z-10 scale-0">
+            <button class="todo--remove-all px-1 text-left">Remove all todo</button>
+            <button class="task--remove-done px-1 text-left">Remove completed todo</button>
+          </div>
+        </div>
       </div>
     `
   );
@@ -198,10 +266,10 @@ const showTask = () => {
   }
 
   // reset all element inside task content element
-  el(".task--content").innerHTML = null;
+  e(".task--content").innerHTML = null;
 
   // reset all element inside todos element
-  el(".todos").innerHTML = null;
+  e(".todos").innerHTML = null;
 
   // add new element from array that contain data from local storage
   taskList.forEach((e) => {
@@ -247,7 +315,7 @@ const removeAllTask = () => {
 
 // remove completed task
 const removeComTask = () => {
-  const doneTask = el(".task.done", "node");
+  const doneTask = el(".task.done");
 
   // check done task
   if (!doneTask.length) return alert("Theres no completed task yet");
@@ -260,7 +328,7 @@ const removeComTask = () => {
   ) {
     // looping delete function on each done task
     doneTask.forEach((e) => {
-      deleteTask(Array.from(el(".task", "node")).indexOf(e));
+      deleteTask(Array.from(el(".task")).indexOf(e));
     });
 
     // update tasks
@@ -271,14 +339,14 @@ const removeComTask = () => {
 // render todolist into document
 const todo = (todo, index) => {
   // if theres no todo--content with given index, just return
-  if (!el(".todo--content", "node")[index]) return;
+  if (!el(".todo--content")[index]) return;
 
-  el(".todo--content", "node")[index].insertAdjacentHTML(
+  el(".todo--content")[index].insertAdjacentHTML(
     "beforeend",
     `
-      <li class="todo">
-        <p class="todo--name">${todo}</p>
-        <button class="todo--delete"><i class="fas fa-trash pointer-events-none"></i></button>
+      <li class="todo mx-2 my-1 py-2 relative rounded bg-gray-800">
+        <p class="todo--name ml-2">${todo}</p>
+        <button class="todo--delete absolute inset-y-0 right-4"><i class="fas fa-trash pointer-events-none"></i></button>
       </li>
     `
   );
@@ -336,7 +404,7 @@ const showTodos = () => {
   }
 
   // reset all element inside todo content
-  el(".todo--content", "node").forEach((e) => {
+  el(".todo--content").forEach((e) => {
     e.innerHTML = null;
   });
 
@@ -351,8 +419,7 @@ const showTodos = () => {
 const deleteTodo = (position, index) => {
   const getLocalStorage = localStorage.getItem("Todo List");
 
-  // push data from local storage into array
-  todoList = JSON.parse(getLocalStorage);
+  todoList = JSON.parse(getLocalStorage); // push data from local storage into array
 
   // delete element inside multi dimension array based on array position and index given in parameter
   todoList[position].splice(index, 1);
@@ -360,8 +427,7 @@ const deleteTodo = (position, index) => {
   // update local storage data using modified multi dimension array
   localStorage.setItem("Todo List", JSON.stringify(todoList));
 
-  // update todo list from local storage
-  showTodos();
+  showTodos(); // update todo list from local storage
 };
 
 // delete all todos function
@@ -391,25 +457,19 @@ const menuEvent = (event) => {
 
 // callback function when todo--add-new onSubmit event triggered
 const submitEvent = (event) => {
-  // define the element of the form
-  const { srcElement: element } = event;
+  const { srcElement: element } = event; // define the element of the form
 
-  // define the index of the form
-  const index = Array.from(el(".todo--add-new", "node")).indexOf(element);
+  const index = Array.from(el(".todo--add-new")).indexOf(element); // define the index of the form
 
-  // prevent document reloading when submit button triggered
-  event.preventDefault();
+  event.preventDefault(); // prevent document reloading when submit button triggered
 
-  // call addLocalTodo function
-  addlocalTodo(element.firstElementChild.value, index);
-  // call addTodo function
-  addTodo(index);
+  addlocalTodo(element.firstElementChild.nextElementSibling.value, index); // call addLocalTodo function
 
-  // reset the form after all callback function executed
-  element.reset();
+  addTodo(index); // call addTodo function
 
-  // check todo
-  checkTodo(index);
+  element.reset(); // reset the form after all callback function executed
+
+  checkTodo(index); // check todo
 };
 
 // run these function after dom loaded
@@ -420,101 +480,104 @@ window.addEventListener("load", () => {
   showTodos();
   dummyTodo();
   // check todo for each one of it
-  for (let i = 0; i < el(".todo--task", "node").length; i++) {
+  for (let i = 0; i < el(".todo--task").length; i++) {
     checkTodo(i);
   }
 
   // add css variable depens on windows inner height
-  el("link").sheet.insertRule(`
+  e("link").sheet.insertRule(`
     :root {
       --winHeight: ${window.innerHeight}px;
-      --mainHeight: calc(var(--winHeight) - ${
-        el("nav").getBoundingClientRect().height +
-        el("footer").getBoundingClientRect().height
-      }px);
+      --mainHeight: ${
+        window.innerHeight -
+        (e("nav").getBoundingClientRect().height +
+          e("footer").getBoundingClientRect().height)
+      }px;
       --tHeight: calc(var(--mainHeight) - ${
-        el(".task--title").getBoundingClientRect().height +
-        el(".task--foot").getBoundingClientRect().height
+        e(".task--title").getBoundingClientRect().height +
+        e(".task--foot").getBoundingClientRect().height
       }px);
-
     }`);
 });
 
-// // Task List Input Box Validation
-// el(".task--add-new").addEventListener("keyup", () => {
-//   const input = el(".task--add-new input").value;
-//   if (input.trim()) {
-//     console.log("if true do dis");
-//   } else {
-//     console.log("just work");
-//   }
-// });
+/* 
+// prevent page from reloading
+window.addEventListener("beforeunload", (event) => {
+  const e = event || window.event;
+  e.preventDefault(); // prevent from reloading
+  return e ? (e.returnValue = "") : ""; // Legacy method for cross browser support
+}); 
+*/
+
+/*
+// Task List Input Box Validation
+el(".task--add-new").addEventListener("keyup", () => {
+  const input = el(".task--add-new input").value;
+  if (input.trim()) {
+    console.log("if true do dis");
+  } else {
+    console.log("just work");
+  }
+});
+*/
 
 // add new task to the task list
-el(".task--add-new").addEventListener("submit", function (e) {
-  // prevent page from reloading when submitted
-  e.preventDefault();
+e(".task--add-new").addEventListener("submit", function (e) {
+  e.preventDefault(); // prevent page from reloading when submitted
 
-  // push data to local storage
-  addLocal(this.firstElementChild.nextElementSibling.value);
+  addLocal(this.firstElementChild.nextElementSibling.value); // push data to local storages
 
-  // add the input value into list
-  addTask();
+  addTask(); // add the input value into list
 
-  // run check task function
-  checkTask();
+  checkTask(); // run check task function
 
-  // clear the input box after adding value into the list
-  this.reset();
-  // check for remaining task
-  remainTask();
+  this.reset(); // clear the input box after adding value into the list
 
-  //checkTodo
-  for (let i = 0; i < el(".todo--task", "node").length; i++) {
-    checkTodo(i);
-  }
+  remainTask(); // check for remaining task
 
-  //dummyTodo function
-  dummyTodo();
+  for (let i = 0; i < el(".todo--task").length; i++) checkTodo(i); //checkTodo
+
+  dummyTodo(); //dummyTodo function
 });
 
 // click event handler
 document.addEventListener("click", ({ target }) => {
   // remove all task button
-  if (target === el(".task--remove-all")) {
+  if (target === e(".task--remove-all")) {
     // remove all task when there is a task
     isTask() ? removeAllTask() : false;
 
-    // run check task function
-    checkTask();
+    checkTask(); // run check task function
 
-    // check for remain task to do
-    remainTask();
+    remainTask(); // check for remain task to do
 
-    //dummyTodo function
-    dummyTodo();
+    dummyTodo(); //dummyTodo function
   }
 
   // remove done tasks button
-  if (target === el(".task--remove-done")) {
+  if (target === e(".task--remove-done")) {
     // remove all completed tasks
     isTask() ? removeComTask() : false;
 
-    // run check task function
-    checkTask();
+    checkTask(); // run check task function
 
-    // check for remain task to do
-    remainTask();
+    remainTask(); // check for remain task to do
   }
 
   if (
-    target != el("button[type=button]") &&
-    !el(".task--remove").classList.contains("scale-0")
+    target != e("button[type=button]") &&
+    !e(".task--remove").classList.contains("scale-0")
   ) {
-    el(".task--remove").classList.add("scale-0");
+    e(".task--remove").classList.add("scale-0");
+  }
+  if (
+    target != e(".todo--menuButton") &&
+    !e(".todo--remove").classList.contains("scale-0")
+  ) {
+    e(".todo--remove").classList.add("scale-0");
   }
 
-  el(".task--delete", "node").forEach((e, i) => {
+  el(".task--delete").forEach((e, i) => {
     if (target === e) {
       // delete task
       confirm(`
@@ -523,23 +586,19 @@ document.addEventListener("click", ({ target }) => {
         ? deleteTask(i) // delete task function
         : false;
 
-      // run check task function
-      checkTask();
+      checkTask(); // run check task function
 
-      // check for remain task to do
-      remainTask();
+      remainTask(); // check for remain task to do
 
-      // check todo
-      checkTodo(i);
+      checkTodo(i); // check todo
 
-      //dummyTodo function
-      dummyTodo();
+      dummyTodo(); //dummyTodo function
     }
   });
 
-  el(".todo--delete", "node").forEach((e) => {
+  el(".todo--delete").forEach((e) => {
     if (target === e) {
-      const position = Array.from(el(".todo--content", "node")).indexOf(
+      const position = Array.from(el(".todo--content")).indexOf(
         e.parentElement.parentElement
       );
       const index = Array.from(e.parentElement.parentElement.children).indexOf(
@@ -552,31 +611,46 @@ document.addEventListener("click", ({ target }) => {
         ? deleteTodo(position, index)
         : false;
 
-      // check todo
-      checkTodo(position);
+      checkTodo(position); // check todo
     }
   });
 
-  el(".todo--remove-all", "node").forEach((e) => {
+  el(".todo--remove-all").forEach((e) => {
     if (target === e) {
       // define index of the target
-      const index = Array.from(el(".todo--remove-all", "node")).indexOf(target);
+      const index = Array.from(el(".todo--remove-all")).indexOf(target);
 
       // define target todo title
-      const title = el(".todo--title", "node")[index].firstElementChild
-        .textContent;
+      const title = el(".todo--title")[index].firstElementChild.textContent;
 
       // if there is no todo inside, ecsape the loop
       if (!todoList[index] || !todoList[index].length) return;
 
       confirm(`
-        Are you sure want to delete all "${title}" todo?
+        Are you sure want to delete all todo in "${title}" task ?
       `)
         ? deleteAllTodo(index)
         : false;
 
-      // check todo
-      checkTodo(index);
+      checkTodo(index); // check todo
     }
   });
 });
+
+const main = {
+  element: e("main"),
+  observer: null,
+  observeConfig: { childList: true, attributes: true, subtree: true },
+  observeCallback(mutationList) {
+    mutationList.forEach((mutation) => {
+      console.log(mutation);
+    });
+  },
+  observeStart() {
+    this.observer = new MutationObserver(this.observeCallback);
+    this.observer.observe(this.element, this.observeConfig);
+  },
+  observeStop() {
+    this.observer.disconnect();
+  },
+};

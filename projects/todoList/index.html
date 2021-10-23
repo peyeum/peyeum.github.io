@@ -17,17 +17,13 @@
             <h4>TATO</h4>
         </nav>
 
-        <main class="relative grid bg-gray-900 max-h-[var(--mainHeight)]">
-            <div class="tasks overflow-scroll grid grid-rows-[max-content,1fr,max-content]">
+        <main class="relative grid bg-gray-900 max-h-[var(--mainHeight)] overflow-hidden">
+            <div class="tasks overflow-scroll grid grid-rows-[max-content,max-content,1fr]">
                 <span class="task--title flex justify-around my-4">
-                    <p>Task List</p>
+                    <p>Task Category</p>
                     <!-- task remaining goes here -->
                     <p class="task--remain"></p>
                 </span>
-
-                <ul class="task--content max-h-[var(--tHeight)] overflow-scroll">
-                    <!-- task list goes here -->
-                </ul>
 
                 <div class="task--foot relative">
                     <form class="task--add-new m-4 py-1 grid grid-cols-[1fr,80%,1fr] bg-gray-700 rounded-xl">
@@ -45,7 +41,7 @@
 
 
                     <div
-                        class="task--remove absolute grid grid-cols-1 auto-rows-[2rem] gap-1 top-[-5rem] ml-4 p-2 rounded bg-gray-700 transform origin-bottom-left scale-0 transition-transform">
+                        class="task--remove absolute grid grid-cols-1 auto-rows-[2rem] gap-1 top-[5rem] ml-4 p-2 rounded bg-gray-700 transform origin-top-left scale-0 transition-transform z-10">
 
                         <button class="task--remove-all px-1 text-left">Remove all tasks</button>
 
@@ -54,15 +50,21 @@
                     </div>
                 </div>
 
+                <ul class="task--content max-h-[var(--tHeight)] overflow-scroll mb-2">
+                    <!-- task list goes here -->
+                </ul>
             </div>
 
-            <div class="todos overflow-scroll hidden">
+            <div class="todos overflow-scroll h-auto hidden">
                 <!-- todos goes here -->
             </div>
         </main>
 
-        <footer class="py-4 px-2 bg-indigo-900">
+        <footer class="py-4 px-2 bg-indigo-900 grid grid-cols-[1fr,max-content] items-center">
             <h4>Just a List of Tasks todo</h4>
+            <button type="button" class="backButton mr-4 pointer-events-none" onclick="backClickHandler(event)">
+                <i class="fas fa-arrow-left text-[1.75em] pointer-events-none transition-opacity opacity-0"></i>
+            </button>
         </footer>
     </div>
 </body>
