@@ -606,14 +606,12 @@ window.addEventListener("resize", () => {
   initialState();
 });
 
-/* 
 // prevent page from reloading
 window.addEventListener("beforeunload", (event) => {
   const e = event || window.event;
   e.preventDefault(); // prevent from reloading
   return e ? (e.returnValue = "") : ""; // Legacy method for cross browser support
-}); 
-*/
+});
 
 /*
 // Task List Input Box Validation
