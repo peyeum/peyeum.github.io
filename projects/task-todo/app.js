@@ -230,6 +230,16 @@ const taskClickHandler = ({ srcElement: element }) => {
   todoFind(element).classList.toggle("grid");
 };
 
+// check for active or on focus input in todo--add-new form
+const isTodoInputFocus = () => {
+  let flag = false;
+  el(".todo--add-new > input").forEach((e) => {
+    if (e == document.activeElement) flag = true;
+  });
+  return flag;
+};
+
+// obviously named
 const initialState = () => {
   if (!isMobile()) {
     if (todoActive()) {
@@ -240,7 +250,7 @@ const initialState = () => {
   }
 
   if (todoActive()) {
-    if (e(".todo--add-new > input") == document.activeElement) return; // escape function if the input form actived
+    if (isTodoInputFocus) return; // escape function if the input form actived
     else e(".backButton").click(); // click the back button
   }
 
