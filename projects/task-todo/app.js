@@ -240,7 +240,8 @@ const initialState = () => {
   }
 
   if (todoActive()) {
-    e(".backButton").click();
+    if (e(".todo--add-new > input") == document.activeElement) return; // escape function if the input form actived
+    else e(".backButton").click(); // click the back button
   }
 
   el(".task").forEach((e) => {
