@@ -109,7 +109,7 @@ el(".theme").addEventListener("click", function () {
 
   let theme;
   html.dataset.colorMode === "dark" ? (theme = "Dark") : (theme = "Light");
-  el(".info").ariaLabel = theme;
+  //el(".info").ariaLabel = theme;
 });
 
 //  click logo to scroll to top

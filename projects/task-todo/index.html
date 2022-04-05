@@ -7,18 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Todo</title>
     <link rel="stylesheet" href="./styles/output.css">
+    <link rel="stylesheet" href="./styles/blob.css">
     <script src="https://kit.fontawesome.com/424f38a2af.js" crossorigin="anonymous"></script>
-    <script defer src="app.js"></script>
+    <script src="./app.js" defer></script>
 </head>
 
 <body>
-    <div class="grid grid-rows-[max-content,1fr,max-content] h-[var(--winHeight)] text-gray-300 text-sm sm:text-lg">
+    <section class="grid grid-rows-[max-content,1fr,max-content] h-[var(--winHeight)] text-gray-300 text-sm md:text-lg">
         <nav class="bg-indigo-900 py-4 px-1">
             <h4>TATO</h4>
         </nav>
 
-        <main class="relative grid bg-gray-900 max-h-[var(--mainHeight)] overflow-hidden">
-            <div class="tasks overflow-scroll grid grid-rows-[max-content,max-content,1fr]">
+        <main class="
+        relative grid bg-gray-900 max-h-[var(--mainHeight)] overflow-hidden sm:grid-cols-[minmax(min-content,25vw),1fr]
+        ">
+            <div class="tasks grid grid-rows-[max-content,max-content,1fr] overflow-hidden">
                 <span class="task--title flex justify-around my-4">
                     <p>Task Category</p>
                     <!-- task remaining goes here -->
@@ -41,7 +44,7 @@
 
 
                     <div
-                        class="task--remove absolute grid grid-cols-1 auto-rows-[2rem] gap-1 top-[5rem] ml-4 p-2 rounded bg-gray-700 transform origin-top-left scale-0 transition-transform z-10">
+                        class="task--remove absolute grid grid-cols-1 auto-rows-[2rem] gap-1 top-[5rem] md:top-[5.25rem] ml-4 p-2 rounded bg-gray-700 transform origin-top-left scale-0 transition-transform z-10 shadow-lg">
 
                         <button class="task--remove-all px-1 text-left">Remove all tasks</button>
 
@@ -50,12 +53,13 @@
                     </div>
                 </div>
 
-                <ul class="task--content max-h-[var(--tHeight)] overflow-scroll mb-2">
+                <ul class="
+                task--content max-h-[var(--tHeight)] scrollbar-thin scrollbar-track-track scrollbar-thumb-thumb over ">
                     <!-- task list goes here -->
                 </ul>
             </div>
 
-            <div class="todos overflow-scroll h-auto hidden">
+            <div class="todos overflow-hidden h-auto hidden sm:block sm:bg-gray-800/60 ">
                 <!-- todos goes here -->
             </div>
         </main>
@@ -66,7 +70,8 @@
                 <i class="fas fa-arrow-left text-[1.75em] pointer-events-none transition-opacity opacity-0"></i>
             </button>
         </footer>
-    </div>
+    </section>
+
 </body>
 
 </html>
