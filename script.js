@@ -14,8 +14,9 @@ const overham = function makeOverlayAppearAndSomeAnimation() {
 
   if (overlay.classList.contains("active")) {
     setTimeout(() => overlay.classList.toggle("active"), 250);
-  } else overlay.classList.toggle("active");
-
+  } else {
+    overlay.classList.toggle("active");
+  }
   hamburger.firstElementChild.classList.toggle("ham0");
   hamburger.firstElementChild.nextElementSibling.classList.toggle("ham1");
   hamburger.lastElementChild.classList.toggle("ham2");
@@ -135,8 +136,10 @@ el(".overlay").addEventListener("click", function ({ target }) {
 // hide sub navbar when about projects contact and logo clicked
 document.addEventListener("click", ({ target }) => {
   const elements = [el(".logo > *"), ...el(".sub-nav li"), ...el("li a")];
-
-  elements.includes(target) ? overham() : false;
+  const active = el(".overlay").classList.contains("active");
+  if (elements.includes(target) && active) {
+    overham();
+  }
 });
 
 // pesan dari contact us
